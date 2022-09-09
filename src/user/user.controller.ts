@@ -1,13 +1,16 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   ParseIntPipe,
   Patch,
   Post,
   Query,
+  UseInterceptors,
 } from '@nestjs/common';
 import { createUserDto, UpdateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
@@ -17,12 +20,15 @@ export class UserController {
   constructor(private userService: UserService) {}
   @Post('/signup')
   createUser(@Body() userInfo: createUserDto) {
-    this.userService.create(userInfo);
+    return this.userService.create(userInfo);
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
   @Get('/:id')
   findUserById(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findUserById(id);
+    const user = this.userService.findUserById(id);
+    if (!user) throw new NotFoundException();
+    return user;
   }
 
   @Get()

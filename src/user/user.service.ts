@@ -13,10 +13,7 @@ export class UserService {
   }
 
   async findUserById(id: number): Promise<User> {
-    const user = await this.repo.findOneBy({ id });
-    console.log(user);
-    if (!user) throw new NotFoundException();
-    return user;
+    return await this.repo.findOneBy({ id });
   }
 
   findUserByEmail(email: string): Promise<User[]> {
