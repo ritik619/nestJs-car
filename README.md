@@ -23,8 +23,13 @@
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
 ## Description
-
+#overall
 ![image](https://user-images.githubusercontent.com/35389814/189044303-2c1e1af8-5b5e-47d4-96a4-ea1d1b805ca1.png)
+
+# Auth Routes
+![image](https://user-images.githubusercontent.com/35389814/189419144-06e773c7-a392-4df8-8c82-a8064ceef2fb.png)
+
+
 
 ## Installation
 
