@@ -42,3 +42,13 @@ export class UserResponseDto {
   @Expose()
   id: string;
 }
+
+export class LoginUserDto {
+  @IsEmail()
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty()
+  @IsString()
+  password: string;
+}

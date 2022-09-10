@@ -11,15 +11,35 @@ import {
   Query,
 } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/serializeInterceptor';
-import { createUserDto, UpdateUserDto, UserResponseDto } from './dto/user.dto';
+import { AuthService } from './auth.service';
+import {
+  createUserDto,
+  LoginUserDto,
+  UpdateUserDto,
+  UserResponseDto,
+} from './dto/user.dto';
 import { UserService } from './user.service';
 
 //serialize all the responses
 @Serialize(UserResponseDto)
 @Controller('auth')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService,
+  ) {}
+
   @Post('/signup')
+  signUp(@Body() userInfo: createUserDto) {
+    return this.authService.signUp(userInfo);
+  }
+
+  @Post('/signin')
+  signIn(@Body() userLogin: LoginUserDto) {
+    return this.authService.signIn(userLogin);
+  }
+
+  @Post('/create')
   createUser(@Body() userInfo: createUserDto) {
     return this.userService.create(userInfo);
   }
